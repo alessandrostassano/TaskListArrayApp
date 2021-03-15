@@ -60,6 +60,7 @@ $mockTaskList = array(
 
 foreach ($testCases as $testCase) {
     extract($testCase);
+    
     $actual = array_filter($mockTaskList, searchText($searchText));
     
     assertEquals('array', gettype($actual),'il risultato è un ');

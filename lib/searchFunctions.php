@@ -3,10 +3,12 @@
  * Funzione di ordine superiore funzione che restituisce una funzione
  * Programmazione Funzionale - dichiarativo 
  */
-function searchText($searchText) {
+function searchText (string $taskItem){
+    ($taskItem["taskName"]);
+    $result = strpos($taskItem["taskName"], $searchText)!== false;
+    return $result;
     
-   
-}
+};
 
 /**
  * @var string $status è la stringa che corrisponde allo status da cercare
@@ -14,7 +16,8 @@ function searchText($searchText) {
  * @return callable La funzione che verrà utilizzata da array_filter
  */
 function searchStatus(string $status) : callable {
-    
-} 
-
+    return function ($taskItem) use ($status){
+        return strpos($taskItem, $status)!==false;
+    };
+}
 
