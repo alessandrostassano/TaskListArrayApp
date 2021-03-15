@@ -1,12 +1,26 @@
 <?php
 
-require "lib\JSONreader.php";
-$elenco = JSONReader("./task");
+require "./lib/JSONreader.php";
 require "./lib/searchFunctions.php";
 
 
+$taskList = JSONReader("./dataset/TaskList.json");
+if (isset($_GET["searchText"])) {
+    $searchText = trim(filter_var($_GET["searchText"],FILTER_SANITIZE_STRING));
+    $taskList = array_filter($taskList, searchText($searchText)); //array filter sta applicando la condizione di vero o falso su ogni elemento dell'array dato, della funzione esplicata dopo la parantesi e la virgola
+}else {
+    $searchText = "";
+}
 
+
+
+
+
+//var_dump($searchText);
 ?>
+
+
+
 
 
 
@@ -66,15 +80,26 @@ require "./lib/searchFunctions.php";
                     <th class="text-center">data</th>
                 </tr>
                 <tr>
-                    <td>Comprare il latte</td>
+                <?php 
+                      foreach ($taskList as $key => $task) { 
+            
+                        $status = $task["status"];
+                        $taskName = $task["taskName"];
+                        $expirationDate = $task["expirationDate"];
+                      
+
+                ?>
+        
+                    <td><?php echo $taskName ?> </td>
                     <td class="text-center">
-                        <span class="badge bg-danger text-uppercase">todo</span>
+                        <span class="badge bg-danger text-uppercase"> <?php echo $status ?></span>
                     </td>
-                    <td class="text-nowrap">
-                        3 Luglio
+                    <td class="text-nowrap "> 
+                    <?php echo $expirationDate ?>
                     </td>
-                </tr>
-                <tr>
+            </tr>
+            <?php } ?>
+                <!--<tr>
                     <td>Comprare la farina</td>
                     <td class="text-center">
                         <span class="badge bg-secondary text-uppercase">done</span>
@@ -91,7 +116,7 @@ require "./lib/searchFunctions.php";
                     <td class="text-nowrap">
                         18 Settembre
                     </td>
-                </tr>
+                </tr> -->
             </table>
 
         </section>
