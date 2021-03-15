@@ -4,13 +4,21 @@ require "./lib/JSONreader.php";
 require "./lib/searchFunctions.php";
 
 
+
 $taskList = JSONReader("./dataset/TaskList.json");
-if (isset($_GET["searchText"])) {
+if (isset($_GET['searchText']) && trim($_GET['searchText']) !== '') {
     $searchText = trim(filter_var($_GET["searchText"],FILTER_SANITIZE_STRING));
     $taskList = array_filter($taskList, searchText($searchText)); //array filter sta applicando la condizione di vero o falso su ogni elemento dell'array dato, della funzione esplicata dopo la parantesi e la virgola
 }else {
     $searchText = "";
 }
+
+//il name serve a php per prendere il valore che hai selezionato
+if (isset($_GET["status"])) {
+    
+}
+
+
 
 
 
@@ -41,32 +49,33 @@ if (isset($_GET["searchText"])) {
             <h1 class="display-1">Tasklist</h1>
         </div>
     </div>
- 
+    
+    <form action="./index.php">
     <div class="container">
         <div class="input-group pb-3 my-1">
             <label class="w-100 pb-1 fw-bold" for="searchText">Cerca</label>
-            <input id="searchText"  type="text" class="form-control" placeholder="attività da cercare">
+            <input id="searchText" name = "searchText" type="text" class="form-control" placeholder="attività da cercare">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button">Invia</button>
+              <button class="btn btn-primary" type="submit">Invia</button>
             </div>
         </div>
 
         <div id="status-radio" class=" mb-3">
             <div class="fw-bold pe-2 w-100">Stato attività</div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" value="option1">
+                <input class="form-check-input" type="radio" value="all" name="status">
                 <label class="form-check-label" >tutti</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option1">
+                <input class="form-check-input" type="radio"   value="to do" name="status">
                 <label class="form-check-label" >da fare</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option2">
+                <input class="form-check-input" type="radio"   value="progress" name="status">
                 <label class="form-check-label" >in lavorazione</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="option2">
+                <input class="form-check-input" type="radio"   value="done" name="status">
                 <label class="form-check-label" >fatto</label>
               </div>
         </div>
@@ -121,6 +130,7 @@ if (isset($_GET["searchText"])) {
 
         </section>
     </div>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
