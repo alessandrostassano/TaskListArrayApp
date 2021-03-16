@@ -23,3 +23,15 @@ function searchStatus(string $status) : callable {
 
 }
 
+function searchColors ($status) {
+    if ($status === "progress") {
+        return "primary";
+    }
+    else if ($status === "done") {
+        return "secondary";
+    }
+    else if ($status === "todo") {
+        return "danger";
+}
+}
+

@@ -18,19 +18,8 @@ if (isset($_GET["status"])) {
 }
 
 
-
-
-
-
-
 //var_dump($searchText);
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +89,8 @@ if (isset($_GET["status"])) {
         
                     <td><?php echo $taskName ?> </td>
                     <td class="text-center">
-                        <span class="badge bg-danger text-uppercase"> <?php echo $status ?></span>
+                        <span class="badge bg-<?php echo searchColors($status) ?> text-uppercase"> <?php echo $status ?></span>
+                        
                     </td>
                     <td class="text-nowrap "> 
                     <?php echo $expirationDate ?>
