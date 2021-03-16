@@ -18,7 +18,8 @@ function searchText ($searchText){
  */
 function searchStatus(string $status) : callable {
     return function ($taskList) use ($status){
-        return strpos($taskList, $status)!==false;
-    };
+    return strpos($taskList["status"], $status)!==false;
+};
+
 }
 

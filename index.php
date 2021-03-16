@@ -3,8 +3,6 @@
 require "./lib/JSONreader.php";
 require "./lib/searchFunctions.php";
 
-
-
 $taskList = JSONReader("./dataset/TaskList.json");
 if (isset($_GET['searchText']) && trim($_GET['searchText']) !== '') {
     $searchText = trim(filter_var($_GET["searchText"],FILTER_SANITIZE_STRING));
@@ -15,7 +13,8 @@ if (isset($_GET['searchText']) && trim($_GET['searchText']) !== '') {
 
 //il name serve a php per prendere il valore che hai selezionato
 if (isset($_GET["status"])) {
-    
+    $searchStatus = $_GET["status"];
+    $taskList = array_filter($taskList, searchStatus($searchStatus));
 }
 
 
@@ -67,7 +66,7 @@ if (isset($_GET["status"])) {
                 <label class="form-check-label" >tutti</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"   value="to do" name="status">
+                <input class="form-check-input" type="radio"   value="todo" name="status">
                 <label class="form-check-label" >da fare</label>
               </div>
               <div class="form-check form-check-inline">
