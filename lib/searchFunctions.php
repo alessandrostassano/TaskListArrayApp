@@ -17,8 +17,12 @@ function searchText ($searchText){
  * @return callable La funzione che verrà utilizzata da array_filter
  */
 function searchStatus(string $status) : callable {
-    return function ($taskList) use ($status){
-    return strpos($taskList["status"], $status)!==false;
+    return function ($taskList) use ($status){ //use permette di utilizzare la variabile locale della prima funzione nel return 
+    if ($status === "all") {
+        return $taskList;
+    } else {
+        return strpos($taskList["status"], $status)!==false; //il parametro preso in ingresso è lo $status inserito dall'utente. La funzione secondaria prende come argomento tramite lo use lo status, e nelle condizioni chiede se lo status inserito è uguale al valore all, se si ritorna una task list completa di tutti i nomi, altrimenti ritorna la string position dello status in questione selezionato
+    }
 };
 
 }
