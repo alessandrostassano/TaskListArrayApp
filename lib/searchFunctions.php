@@ -5,7 +5,8 @@
  */
 function searchText ($searchText){
     return function ($taskList) use ($searchText) {
-    return  strpos($taskList['taskName'], $searchText)!== false;
+    $searchText = trim($searchText);
+    return  stripos($taskList['taskName'], $searchText)!== false;
 };
     
     
@@ -21,7 +22,7 @@ function searchStatus(string $status) : callable {
     if ($status === "all") {
         return $taskList;
     } else {
-        return strpos($taskList["status"], $status)!==false; //il parametro preso in ingresso è lo $status inserito dall'utente. La funzione secondaria prende come argomento tramite lo use lo status, e nelle condizioni chiede se lo status inserito è uguale al valore all, se si ritorna una task list completa di tutti i nomi, altrimenti ritorna la string position dello status in questione selezionato
+        return stripos($taskList["status"], $status)!==false; //il parametro preso in ingresso è lo $status inserito dall'utente. La funzione secondaria prende come argomento tramite lo use lo status, e nelle condizioni chiede se lo status inserito è uguale al valore all, se si ritorna una task list completa di tutti i nomi, altrimenti ritorna la string position dello status in questione selezionato
     }
 };
 
