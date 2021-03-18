@@ -5,11 +5,14 @@
  */
 function searchText ($searchText){
     return function ($taskList) use ($searchText) {
-    $searchText = trim($searchText);
-    return  stripos($taskList['taskName'], $searchText)!== false;
+    $searchTextTrim = trim($searchText);
+    If ($searchTextTrim !== ""){
+        return stripos($taskList['taskName'], $searchTaskTrim) !== false; 
+      } else {
+        return true;
+      }
+    
 };
-    
-    
 };
 
 /**
