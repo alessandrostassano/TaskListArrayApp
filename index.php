@@ -1,6 +1,6 @@
 <?php
 
-require "./lib/JSONreader.php";
+require "../lib/JSONreader.php";
 require "./lib/searchFunctions.php";
 
 $taskList = JSONReader("./dataset/TaskList.json");
