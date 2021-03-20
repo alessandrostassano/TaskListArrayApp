@@ -25,7 +25,7 @@ function searchText ($searchText){
  * (progress|done|todo)
  * @return callable La funzione che verrà utilizzata da array_filter
  */
-function searchStatus(string $status) : callable {
+function searchStatus($status) {
     return function ($taskList) use ($status){ //use permette di utilizzare la variabile locale della prima funzione nel return 
     if (($status === "all") || ($status === "")) {
         return $taskList;
