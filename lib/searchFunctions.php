@@ -4,14 +4,19 @@
  * Programmazione Funzionale - dichiarativo 
  */
 function searchText ($searchText){
-    return function ($taskList) use ($searchText) {
-    $searchTextTrim = trim($searchText);
-    If ($searchTextTrim !== ""){
-        return stripos($taskList['taskName'], $searchTaskTrim) !== false; 
-      } else {
-        return true;
-      }
-    
+    return function ($mocktaskList) use ($searchText) { //gli sot dicendo con use di usare anche per questa funzione la variabile contenuta nella funciton superiore $searchText
+        $TextNoSpace = preg_replace("/[ ]+/m"," ",$searchText);
+        $searchTextTrim = trim($TextNoSpace);
+        $TextLower = strtolower($searchTextTrim);
+        //$taskNameLower = strtolower($mocktaskList["taskName"]);
+
+       If ($TextLower !== ""){
+        $risultato = stripos($mocktaskList["taskName"],$TextLower) !== false; 
+       } else {
+        $risultato = true;
+       }
+
+    return $risultato;
 };
 };
 
